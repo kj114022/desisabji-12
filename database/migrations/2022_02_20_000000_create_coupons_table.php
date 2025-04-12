@@ -1,0 +1,45 @@
+<?php
+/**
+ * File name: 2020_08_23_181022_create_coupons_table.php
+ * Last modified: 2020.08.23 at 19:36:46
+
+ */
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class CreateCouponsTable extends Migration
+{
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('coupons', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('code', 50)->unique();
+            $table->text('description')->nullable();
+            $table->integer('redem_per_user')->nullable();
+            $table->integer('total_redem')->nullable();
+            $table->integer('coupon_count')->nullable();
+            $table->integer('discount')->default(0);
+            $table->string('discount_type', 50)->default('percent');           
+            $table->dateTime('expires_at')->nullable();
+            $table->boolean('enabled')->default(0);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('coupons');
+    }
+}

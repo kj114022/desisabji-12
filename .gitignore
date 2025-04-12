@@ -1,0 +1,37 @@
+# Node.js dependencies
+node_modules/
+
+# PHP dependencies
+vendor/
+
+# Laravel specific
+.env
+.env.*.backup
+storage/*.key
+storage/logs/
+bootstrap/cache/
+
+# Compiled assets
+public/js/app.js
+public/css/
+public/build/
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Logs and debug files
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Git-specific
+*.swp
+*.swo
