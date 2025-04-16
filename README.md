@@ -1,92 +1,273 @@
-# desisabji-services
+# DesiSabji Laravel Project Documentation
 
-Desisabji Admin Panel Services in Laravel 8
+This document outlines the setup, migration, and maintenance of the DesiSabji e-commerce project based on Laravel 12.
 
-## Getting started
+## Project Overview
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+DesiSabji is an e-commerce marketplace application that allows customers to browse products, place orders, and have them delivered. The application includes:
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- User management with authentication and roles
+- Product management
+- Order processing
+- Payment gateway integration (PayPal, Stripe, RazorPay)
+- Delivery tracking
+- Vendor management
+- Admin dashboard
 
-## Add your files
+## Technical Stack
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- **Framework**: Laravel 12 (migrated from Laravel 8)
+- **Database**: MySQL/MariaDB
+- **Frontend Build Tool**: Vite (migrated from Laravel Mix)
+- **Repository Pattern**: Custom implementation (replacing InfyOm)
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/sandeepyjjn/desisabji-services.git
-git branch -M main
-git push -uf origin main
-```
+## Initial Setup
 
-## Integrate with your tools
+### Prerequisites
 
-- [ ] [Set up project integrations](https://gitlab.com/sandeepyjjn/desisabji-services/-/settings/integrations)
+- PHP 8.2 or higher
+- MariaDB 10.x
+- Composer
+- Node.js and npm
 
-## Collaborate with your team
+### Environment Setup
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+1. Clone the repository:
+   ```bash
+   git clone [repository-url]
+   cd desisabji-12
+   ```
 
-## Test and Deploy
+2. Install PHP dependencies:
+   ```bash
+   composer install
+   ```
 
-Use the built-in continuous integration in GitLab.
+3. Install Node.js dependencies:
+   ```bash
+   npm install
+   ```
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+4. Create environment file:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-***
+5. Configure database connection in `.env`:
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=algolive
+   DB_USERNAME=root
+   DB_PASSWORD=your_password
+   ```
 
-# Editing this README
+6. Configure MariaDB user permissions:
+   ```sql
+   SET PASSWORD FOR 'root'@'localhost' = PASSWORD('your_password');
+   FLUSH PRIVILEGES;
+   CREATE DATABASE algolive;
+   ```
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+7. Run migrations and seed the database:
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   ```
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+8. Link storage for media:
+   ```bash
+   php artisan storage:link
+   ```
 
-## Name
-Choose a self-explaining name for your project.
+9. Compile assets:
+   ```bash
+   npm run dev
+   # or for production
+   npm run build
+   ```
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+10. Start the development server:
+    ```bash
+    php artisan serve
+    ```
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## Migration from Laravel 8 to Laravel 12
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### Major Changes Made
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+1. **PHP Version Upgrade**:
+   - Updated minimum PHP version requirement to 8.2
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+2. **Composer Dependencies**:
+   - Updated `laravel/framework` to version 12.x
+   - Removed unsupported packages like InfyOm Generator
+   - Updated all other packages to compatible versions
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+3. **Frontend Assets**:
+   - Replaced Laravel Mix with Vite
+   - Created new `vite.config.js` file
+   - Updated Blade directives from `@mix` to `@vite`
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+4. **Repository Pattern**:
+   - Created a custom `BaseRepository` class to replace InfyOm's implementation
+   - Updated 38+ repositories to use the new base repository
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+5. **Controller Routes**:
+   - Converted string-based controller routes to array syntax:
+     ```php
+     // Old
+     Route::get('/users', 'UserController@index');
+     
+     // New
+     Route::get('/users', [UserController::class, 'index']);
+     ```
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+6. **Eloquent Changes**:
+   - Updated accessors/mutators to new syntax:
+     ```php
+     // Old
+     public function getFirstNameAttribute($value) { ... }
+     
+     // New
+     protected function firstName(): Attribute {
+         return Attribute::make(
+             get: fn ($value) => ucfirst($value),
+             set: fn ($value) => strtolower($value),
+         );
+     }
+     ```
+   - Replaced `$dates` property with `$casts`
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Database Structure
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+The database consists of the following key tables:
 
-## License
-For open source projects, say how it is licensed.
+- `users` - User accounts
+- `markets` - Vendor markets/shops
+- `products` - Products available for sale
+- `categories` - Product categories
+- `orders` - Customer orders
+- `product_orders` - Pivot table linking products to orders
+- `payments` - Payment records
+- `delivery_addresses` - Customer delivery addresses
+- `drivers` - Delivery personnel
+- `carts` - Customer shopping carts
+- `options` - Product options/variants
+- `media` - Stores media files metadata
+- `app_settings` - Application settings
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## API Endpoints
+
+The application provides a RESTful API for mobile applications:
+
+1. **Authentication**:
+   - `POST /api/login`
+   - `POST /api/register`
+   - `POST /api/logout`
+
+2. **Products**:
+   - `GET /api/products`
+   - `GET /api/products/{id}`
+   
+3. **Orders**:
+   - `GET /api/orders`
+   - `POST /api/orders`
+   - `GET /api/orders/{id}`
+
+4. **Markets**:
+   - `GET /api/markets`
+   - `GET /api/markets/{id}`
+
+## User Roles
+
+The application has the following user roles:
+
+1. `admin` - Full system access
+2. `manager` - Manages markets and products
+3. `client` - Regular customer
+4. `driver` - Delivery personnel
+
+## Maintenance Commands
+
+- Clear cache:
+  ```bash
+  php artisan config:clear
+  php artisan cache:clear
+  php artisan route:clear
+  php artisan view:clear
+  ```
+
+- Run tests:
+  ```bash
+  php artisan test
+  ```
+
+- Update database with new migrations:
+  ```bash
+  php artisan migrate
+  ```
+
+## Environmental Variables
+
+Important environment variables:
+
+- `APP_URL` - Application URL
+- `DB_CONNECTION` - Database connection type
+- `MAIL_MAILER` - Email service configuration
+- `GOOGLE_MAPS_KEY` - For location features
+- `STRIPE_KEY` / `STRIPE_SECRET` - Stripe payment gateway
+- `PAYPAL_CLIENT_ID` / `PAYPAL_SECRET` - PayPal integration
+- `RAZORPAY_KEY` / `RAZORPAY_SECRET` - RazorPay integration
+
+## Common Issues and Troubleshooting
+
+1. **MySQL Authentication Error**:
+   ```
+   ERROR 1698 (28000): Access denied for user 'root'@'localhost'
+   ```
+   Solution: Configure MariaDB to use password authentication:
+   ```sql
+   SET PASSWORD FOR 'root'@'localhost' = PASSWORD('your_password');
+   FLUSH PRIVILEGES;
+   ```
+
+2. **Missing App Key**:
+   ```
+   No application encryption key has been specified.
+   ```
+   Solution: Generate a new application key:
+   ```bash
+   php artisan key:generate
+   ```
+
+3. **PHPUnit Schema Warning**:
+   ```
+   Your XML configuration validates against a deprecated schema.
+   ```
+   Solution: Migrate the configuration:
+   ```bash
+   phpunit --migrate-configuration
+   ```
+
+4. **Missing Repositories**:
+   ```
+   Class "InfyOm\Generator\Common\BaseRepository" not found
+   ```
+   Solution: Implement a custom BaseRepository class to replace the InfyOm one
+
+## Future Improvements
+
+1. Replace remaining InfyOm dependencies with Backpack or custom implementation
+2. Implement comprehensive test suite
+3. Optimize database queries for performance
+4. Enhance mobile API features
+5. Improve payment gateway integrations
+
+## Resources
+
+- [Laravel Documentation](https://laravel.com/docs/12.x)
+- [MariaDB Documentation](https://mariadb.com/kb/en/documentation/)
+- [Vite Documentation](https://vitejs.dev/guide/)
