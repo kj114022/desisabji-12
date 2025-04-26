@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Payment;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class PaymentRepository
@@ -24,6 +24,15 @@ class PaymentRepository extends BaseRepository
         'description',
         'user_id'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

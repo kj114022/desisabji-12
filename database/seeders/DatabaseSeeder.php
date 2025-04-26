@@ -12,54 +12,69 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsersTableSeeder::class);
-        $this->call(CustomFieldsTableSeeder::class);
-        $this->call(CustomFieldValuesTableSeeder::class);
-        $this->call(AppSettingsTableSeeder::class);
-        $this->call(FieldsTableSeeder::class);
-        $this->call(MarketsTableSeeder::class);
-        $this->call(CategoriesTableSeeder::class);
-        $this->call(FaqCategoriesTableSeeder::class);
-        $this->call(OrderStatusesTableSeeder::class);
-        $this->call(CurrenciesTableSeeder::class);
-        $this->call(OptionGroupsTableSeeder::class);
-
-        $this->call(ProductsTableSeeder::class);
-        $this->call(GalleriesTableSeeder::class);
-        $this->call(ProductReviewsTableSeeder::class);
-        $this->call(MarketReviewsTableSeeder::class);
-        $this->call(PaymentsTableSeeder::class);
-        $this->call(DeliveryAddressesTableSeeder::class);
-        $this->call(OrdersTableSeeder::class);
-        $this->call(CartsTableSeeder::class);
-        $this->call(OptionsTableSeeder::class);
-        $this->call(NotificationsTableSeeder::class);
-        $this->call(FaqsTableSeeder::class);
-        $this->call(FavoritesTableSeeder::class);
-
-        $this->call(ProductOrdersTableSeeder::class);
-        $this->call(CartOptionsTableSeeder::class);
-        $this->call(UserMarketsTableSeeder::class);
-        $this->call(DriverMarketsTableSeeder::class);
-        $this->call(ProductOrderOptionsTableSeeder::class);
-        $this->call(FavoriteOptionsTableSeeder::class);
-        $this->call(MarketFieldsTableSeeder::class);
-
-        $this->call(RolesTableSeeder::class);
-        $this->call(DemoPermissionsPermissionsTableSeeder::class);
-        $this->call(ModelHasPermissionsTableSeeder::class);
-        $this->call(ModelHasRolesTableSeeder::class);
-        $this->call(RoleHasPermissionsTableSeeder::class);
-
-        $this->call(MediaTableSeeder::class);
-        $this->call(UploadsTableSeeder::class);
-        $this->call(DriversTableSeeder::class);
-        $this->call(EarningsTableSeeder::class);
-        $this->call(DriversPayoutsTableSeeder::class);
-        $this->call(MarketsPayoutsTableSeeder::class);
-
-        $this->call(CouponPermission::class);
-        $this->call(SlidesSeeder::class);
-       
+        $this->call([
+            // First seed dependencies
+            UsersTableSeeder::class,
+            CustomFieldsTableSeeder::class,
+            FieldsTableSeeder::class,
+            
+            // Then seed the markets
+            MarketsTableSeeder::class,
+            CustomFieldValuesTableSeeder::class,
+            
+            // Core app settings and basic data
+            AppSettingsTableSeeder::class,
+            CategoriesTableSeeder::class,
+            FaqCategoriesTableSeeder::class,
+            OrderStatusesTableSeeder::class,
+            CurrenciesTableSeeder::class,
+            OptionGroupsTableSeeder::class,
+            
+            // Products related seeders
+            ProductsTableSeeder::class,
+            GalleriesTableSeeder::class,
+            ProductReviewsTableSeeder::class,
+            MarketReviewsTableSeeder::class,
+            PaymentsTableSeeder::class,
+            
+            // User related seeders
+            DeliveryAddressesTableSeeder::class,
+            OrdersTableSeeder::class,
+            CartsTableSeeder::class,
+            OptionsTableSeeder::class,
+            NotificationsTableSeeder::class,
+            FaqsTableSeeder::class,
+            FavoritesTableSeeder::class,
+            
+            // Relationship seeders
+            ProductOrdersTableSeeder::class,
+            CartOptionsTableSeeder::class,
+            UserMarketsTableSeeder::class,
+            DriverMarketsTableSeeder::class,
+            ProductOrderOptionsTableSeeder::class,
+            FavoriteOptionsTableSeeder::class,
+            MarketFieldsTableSeeder::class,
+            
+            // Permission related seeders
+            RolesTableSeeder::class,
+            DemoPermissionsPermissionsTableSeeder::class,
+            ModelHasPermissionsTableSeeder::class,
+            ModelHasRolesTableSeeder::class,
+            RoleHasPermissionsTableSeeder::class,
+            
+            // Media and uploads
+            MediaTableSeeder::class,
+            UploadsTableSeeder::class,
+            
+            // Driver related seeders
+            DriversTableSeeder::class,
+            EarningsTableSeeder::class,
+            DriversPayoutsTableSeeder::class,
+            MarketsPayoutsTableSeeder::class,
+            
+            // Additional features
+            CouponPermission::class,
+            SlidesSeeder::class,
+        ]);
     }
 }

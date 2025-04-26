@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\DeliveryAddress;
-use InfyOm\Generator\Common\BaseRepository;
+
 use Illuminate\Support\Facades\Log;
 /**
  * Class DeliveryAddressRepository
@@ -31,6 +31,15 @@ class DeliveryAddressRepository extends BaseRepository
         'state',
         'mobile'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

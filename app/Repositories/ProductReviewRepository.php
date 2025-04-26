@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\ProductReview;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class ProductReviewRepository
@@ -25,6 +25,15 @@ class ProductReviewRepository extends BaseRepository
         'user_id',
         'product_id'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Coupon;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class CouponRepository
@@ -32,6 +32,15 @@ class CouponRepository extends BaseRepository
         'enabled',
         'active'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

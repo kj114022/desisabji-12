@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Category;
-use InfyOm\Generator\Common\BaseRepository;
 
 /**
  * Class CategoryRepository
@@ -21,8 +20,18 @@ class CategoryRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'name',
-        'description'
+        'description',
+        'field_id'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Driver;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class DriverRepository
@@ -26,6 +26,15 @@ class DriverRepository extends BaseRepository
         'earning',
         'available'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

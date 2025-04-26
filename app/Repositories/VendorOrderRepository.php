@@ -5,8 +5,36 @@ namespace App\Repositories;
 use App\Interfaces\VendorOrderRepositoryInterface;
 use App\Models\VendorOrder;
 
-class VendorOrderRepository implements VendorOrderRepositoryInterface 
+class VendorOrderRepository extends BaseRepository implements VendorOrderRepositoryInterface 
 {
+    /**
+     * @var array
+     */
+    protected $fieldSearchable = [
+        'order_id',
+        'product_id',
+        'quantity',
+        'price',
+        'is_fulfilled'
+    ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
+
+    /**
+     * Configure the Model
+     **/
+    public function model()
+    {
+        return VendorOrder::class;
+    }
+    
     public function getAllVendorOrders() 
     {
         return VendorOrder::all();

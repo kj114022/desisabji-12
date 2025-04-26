@@ -10,7 +10,7 @@
 namespace App\Repositories;
 
 use App\Models\Slide;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class SlideRepository
@@ -40,6 +40,15 @@ class SlideRepository extends BaseRepository
         'market_id',
         'enabled'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

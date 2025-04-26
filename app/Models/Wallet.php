@@ -15,11 +15,11 @@ class Wallet extends Model
 {
 
     public $table = 'wallets';
-    
+
 
 
     public $fillable = [
-        'customer_id',     
+        'customer_id',
         'wallet_amt',
         'active'
     ];

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\ProductOrder;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class ProductOrderRepository
@@ -25,6 +25,15 @@ class ProductOrderRepository extends BaseRepository
         'product_id',
         'order_id'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

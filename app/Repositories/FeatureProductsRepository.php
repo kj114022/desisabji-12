@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\FeatureProducts;
 use App\Models\City;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class FeatureCityRepository
@@ -26,6 +26,15 @@ class FeatureProductsRepository extends BaseRepository
         'city_id',
         'active'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

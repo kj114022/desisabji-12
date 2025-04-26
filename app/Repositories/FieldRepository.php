@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Field;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class FieldRepository
@@ -23,6 +23,15 @@ class FieldRepository extends BaseRepository
         'name',
         'description'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

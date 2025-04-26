@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Earning;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class EarningRepository
@@ -28,6 +28,15 @@ class EarningRepository extends BaseRepository
         'delivery_fee',
         'tax'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

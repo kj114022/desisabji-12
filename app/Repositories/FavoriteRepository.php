@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Favorite;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class FavoriteRepository
@@ -23,6 +23,15 @@ class FavoriteRepository extends BaseRepository
         'product_id',
         'user_id'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

@@ -1,18 +1,10 @@
 # DesiSabji Laravel Project Documentation
 
-This document outlines the setup, migration, and maintenance of the DesiSabji e-commerce project based on Laravel 12.
+This document outlines the setup, migration, and maintenance of the DesiSabji e-commerce project based on Laravel 12. It also includes a development journal tracking progress.
 
 ## Project Overview
 
-DesiSabji is an e-commerce marketplace application that allows customers to browse products, place orders, and have them delivered. The application includes:
-
-- User management with authentication and roles
-- Product management
-- Order processing
-- Payment gateway integration (PayPal, Stripe, RazorPay)
-- Delivery tracking
-- Vendor management
-- Admin dashboard
+DesiSabji is an e-commerce marketplace application allowing customers to browse products, place orders, and receive deliveries. Key features include user/product/order management, payment integration (PayPal, Stripe, RazorPay), delivery tracking, vendor management, and an admin dashboard.
 
 ## Technical Stack
 
@@ -20,6 +12,7 @@ DesiSabji is an e-commerce marketplace application that allows customers to brow
 - **Database**: MySQL/MariaDB
 - **Frontend Build Tool**: Vite (migrated from Laravel Mix)
 - **Repository Pattern**: Custom implementation (replacing InfyOm)
+- **PHP**: 8.2+
 
 ## Initial Setup
 
@@ -32,67 +25,24 @@ DesiSabji is an e-commerce marketplace application that allows customers to brow
 
 ### Environment Setup
 
-1. Clone the repository:
-   ```bash
-   git clone [repository-url]
-   cd desisabji-12
-   ```
-
-2. Install PHP dependencies:
-   ```bash
-   composer install
-   ```
-
-3. Install Node.js dependencies:
-   ```bash
-   npm install
-   ```
-
-4. Create environment file:
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
-
-5. Configure database connection in `.env`:
-   ```
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=algolive
-   DB_USERNAME=root
-   DB_PASSWORD=your_password
-   ```
-
-6. Configure MariaDB user permissions:
-   ```sql
-   SET PASSWORD FOR 'root'@'localhost' = PASSWORD('your_password');
-   FLUSH PRIVILEGES;
-   CREATE DATABASE algolive;
-   ```
-
-7. Run migrations and seed the database:
-   ```bash
-   php artisan migrate
-   php artisan db:seed
-   ```
-
-8. Link storage for media:
-   ```bash
-   php artisan storage:link
-   ```
-
-9. Compile assets:
-   ```bash
-   npm run dev
-   # or for production
-   npm run build
-   ```
-
-10. Start the development server:
-    ```bash
-    php artisan serve
+1.  **Clone:** `git clone [repository-url] && cd desisabji-12`
+2.  **Install PHP Dependencies:** `composer install`
+3.  **Install Node Dependencies:** `npm install`
+4.  **Environment File:** `cp .env.example .env && php artisan key:generate`
+5.  **Configure `.env`:** Set `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`, and other necessary variables (payment keys, mail settings, etc.).
+6.  **Database Setup:**
+    ```sql
+    -- Ensure MariaDB user has password auth & create DB
+    SET PASSWORD FOR 'root'@'localhost' = PASSWORD('your_password');
+    FLUSH PRIVILEGES;
+    CREATE DATABASE algolive;
     ```
+7.  **Migrate & Seed:** `php artisan migrate --seed` (See Journal for potential seeder issues)
+8.  **Storage Link:** `php artisan storage:link`
+9.  **Compile Assets:** `npm run dev` (development) or `npm run build` (production)
+10. **Start Server:** `php artisan serve`
+
+---
 
 ## Migration from Laravel 8 to Laravel 12
 
@@ -141,6 +91,8 @@ DesiSabji is an e-commerce marketplace application that allows customers to brow
      ```
    - Replaced `$dates` property with `$casts`
 
+---
+
 ## Database Structure
 
 The database consists of the following key tables:
@@ -158,6 +110,8 @@ The database consists of the following key tables:
 - `options` - Product options/variants
 - `media` - Stores media files metadata
 - `app_settings` - Application settings
+
+---
 
 ## API Endpoints
 
@@ -181,6 +135,8 @@ The application provides a RESTful API for mobile applications:
    - `GET /api/markets`
    - `GET /api/markets/{id}`
 
+---
+
 ## User Roles
 
 The application has the following user roles:
@@ -190,12 +146,14 @@ The application has the following user roles:
 3. `client` - Regular customer
 4. `driver` - Delivery personnel
 
+---
+
 ## Maintenance Commands
 
 - Clear cache:
   ```bash
-  php artisan config:clear
   php artisan cache:clear
+  php artisan config:clear
   php artisan route:clear
   php artisan view:clear
   ```
@@ -210,6 +168,8 @@ The application has the following user roles:
   php artisan migrate
   ```
 
+---
+
 ## Environmental Variables
 
 Important environment variables:
@@ -221,6 +181,8 @@ Important environment variables:
 - `STRIPE_KEY` / `STRIPE_SECRET` - Stripe payment gateway
 - `PAYPAL_CLIENT_ID` / `PAYPAL_SECRET` - PayPal integration
 - `RAZORPAY_KEY` / `RAZORPAY_SECRET` - RazorPay integration
+
+---
 
 ## Common Issues and Troubleshooting
 
@@ -258,6 +220,8 @@ Important environment variables:
    ```
    Solution: Implement a custom BaseRepository class to replace the InfyOm one
 
+---
+
 ## Future Improvements
 
 1. Replace remaining InfyOm dependencies with Backpack or custom implementation
@@ -266,8 +230,84 @@ Important environment variables:
 4. Enhance mobile API features
 5. Improve payment gateway integrations
 
-## Resources
+---
 
-- [Laravel Documentation](https://laravel.com/docs/12.x)
-- [MariaDB Documentation](https://mariadb.com/kb/en/documentation/)
-- [Vite Documentation](https://vitejs.dev/guide/)
+## Development Journal
+
+*This section tracks the project's evolution, focusing on major changes, fixes, and decisions.*
+
+### 2025‑04‑18 (Session 3 - Current)
+
+**Focus:** Repository Pattern Refactoring & IDE Cleanup
+
+**Context:** Following successful database seeding, the next step is ensuring the data access layer (Repositories) functions correctly after the InfyOm removal and Laravel 12 upgrade.
+
+**Progress & Accomplishments:**
+- **Repository Review:** Began reviewing the custom `app/Repositories/BaseRepository.php` and its concrete implementations (e.g., `UserRepository`, `MarketRepository`). The goal is to ensure they align with Laravel 12 practices and correctly replace the old InfyOm functionality.
+- **IDE Diagnostics:** Addressed static analysis warnings reported by the IDE (Intelephense/PHPStan):
+    - Added missing Facade imports (`use Illuminate\Support\Facades\DB;`, `use Illuminate\Support\Facades\Log;`) to relevant seeder files (`DriverMarketsTableSeeder`, `MarketsTableSeeder`, `SlidesSeeder`) to resolve "Undefined type" errors.
+    - Updated this README's "Troubleshooting" section with guidance on resolving common IDE warnings (facade imports, vendor exclusion, PHP version settings).
+
+**Key Files Touched:**
+- `app/Repositories/BaseRepository.php` (Review)
+- `database/seeders/DriverMarketsTableSeeder.php` (Added `use DB;`)
+- `database/seeders/MarketsTableSeeder.php` (Added `use DB;`)
+- `database/seeders/SlidesSeeder.php` (Added `use DB;`, `use Log;`)
+- `README.md` (Updated Troubleshooting, expanded Journal)
+
+**Next Steps:**
+1.  Continue refactoring repositories: Ensure all repository classes extend the custom `BaseRepository` and correctly implement `model()` and `getFieldsSearchable()`.
+2.  Verify repository usage within Controllers and Services to ensure correct data retrieval and manipulation.
+3.  Systematically search for and remove any remaining direct or indirect references to the old `InfyOm` packages.
+4.  Execute tests (`php artisan test`) to catch regressions introduced during refactoring.
+
+---
+
+### 2025‑04‑18 (Session 2)
+
+**Focus:** Database Seeding Issues
+
+**Context:** After the initial migration and dependency updates, running `php artisan migrate --seed` failed due to foreign key constraint violations.
+
+**Progress & Accomplishments:**
+- **Database Seeding Fixed:** Resolved multiple `SQLSTATE[23000]: Integrity constraint violation: 1452` errors during seeding.
+    - **`MarketsTableSeeder`:** Modified to use a static array to insert markets with specific IDs (1-10), replacing the `Market::factory()` approach. This ensures predictable IDs for dependent seeders.
+    - **`DatabaseSeeder`:** Reordered seeder calls to respect dependencies (e.g., `FieldsTableSeeder` before `MarketsTableSeeder`, which is before `MarketFieldsTableSeeder` and `DriverMarketsTableSeeder`).
+    - **`SlidesSeeder`:** Refactored permission seeding. It now inserts permissions using `DB::table('permissions')->insertGetId()`, captures the *actual* returned IDs, and uses these IDs when seeding the `role_has_permissions` pivot table.
+- **Error Handling:** Added basic `try/catch` blocks and `Log::error()` calls within problematic seeders to aid future debugging.
+
+**Commands Executed:**
+```bash
+# Diagnosis & Fix Iteration
+php artisan migrate:fresh --seed # Initial failure
+php artisan db:seed --class=Database\\Seeders\\MarketsTableSeeder # Test individual seeders
+php artisan db:seed --class=Database\\Seeders\\DriverMarketsTableSeeder
+php artisan db:seed --class=Database\\Seeders\\MarketFieldsTableSeeder
+php artisan db:seed --class=Database\\Seeders\\SlidesSeeder
+php artisan tinker # (Used DB::table(...)->pluck('id'); to check data)
+php artisan migrate:fresh --seed # Final success
+```
+- **Database Structure:** Verified the database structure using `php artisan migrate:status` and `php artisan db:wipe` to ensure a clean slate before re-seeding.
+- **Database Dump:** Created a fresh database dump using `mysqldump` for backup and future reference.
+```bash
+
+
+
+
+## Testing & Validation
+### Run all tests
+php artisan test
+
+# Run specific test file
+php artisan test --filter=ProductAPITest
+
+# Run tests with coverage report (requires Xdebug)
+XDEBUG_MODE=coverage php artisan test --coverage
+
+# Run only unit tests
+php artisan test --testsuite=Unit
+
+# Run only feature tests
+php artisan test --testsuite=Feature
+
+

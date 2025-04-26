@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\CityArea;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class CityAreaRepository
@@ -24,6 +24,15 @@ class CityAreaRepository extends BaseRepository
         'state',
         'status'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

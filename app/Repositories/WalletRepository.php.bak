@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\Wallet;
+
+
+/**
+ * Class WalletRepository
+ * @package App\Repositories
+ * @version August 23, 2020, 6:10 pm UTC
+ *
+ * @method Wallet findWithoutFail($id, $columns = ['*'])
+ * @method Wallet find($id, $columns = ['*'])
+ * @method Wallet first($columns = ['*'])
+*/
+class WalletRepository extends BaseRepository
+{
+    /**
+     * @var array
+     */
+    protected $fieldSearchable = [
+        'customer_id',
+        'wallet_amt',
+        'active'
+    ];
+
+    /**
+     * Configure the Model
+     **/
+    public function model()
+    {
+        return Wallet::class;
+    }
+}

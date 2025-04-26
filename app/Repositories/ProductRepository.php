@@ -10,7 +10,7 @@
 namespace App\Repositories;
 
 use App\Models\Product;
-use InfyOm\Generator\Common\BaseRepository;
+
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Traits\CacheableRepository;
 
@@ -43,6 +43,15 @@ class ProductRepository extends BaseRepository implements CacheableInterface
         'market_id',
         'category_id',
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

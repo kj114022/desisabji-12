@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\MarketsPayout;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class MarketsPayoutRepository

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\State;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class StateRepository
@@ -23,6 +23,15 @@ class StateRepository extends BaseRepository
         'name',
         'country_code'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

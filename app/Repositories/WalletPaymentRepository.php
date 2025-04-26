@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\WalletPayment;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class WalletPaymentRepository
@@ -24,6 +24,15 @@ class WalletPaymentRepository extends BaseRepository
         'payment_date',
         'payment_amt'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

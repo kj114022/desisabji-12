@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\CustomField;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class CustomFieldRepository
@@ -29,6 +29,15 @@ class CustomFieldRepository extends BaseRepository
         'order',
         'custom_field_model'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\ReferralPayment;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class ReferralPaymentRepository

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use Spatie\Permission\Models\Role;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class RoleRepository
@@ -23,6 +23,15 @@ class RoleRepository extends BaseRepository
         'name',
         'guard_name'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

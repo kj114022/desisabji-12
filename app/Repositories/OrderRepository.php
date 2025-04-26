@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Order;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class OrderRepository
@@ -30,6 +30,15 @@ class OrderRepository extends BaseRepository
         'driver_id',
         'market_id',
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

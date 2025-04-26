@@ -1,0 +1,70 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: desisabji-app
+    restart: unless-stopped
+    environment:
+      DB_HOST: database
+      DB_DATABASE: algolive
+      DB_USERNAME: desisabji
+      DB_PASSWORD: password
+      APP_ENV: local
+      APP_DEBUG: 'true'
+    volumes:
+      - .:/var/www/html
+      - ./storage/logs:/var/www/html/storage/logs
+    ports:
+      - "8000:80"
+    networks:
+      - desisabji-network
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.6
+    container_name: desisabji-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: algolive
+      MYSQL_USER: desisabji
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - desisabji-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+
+  sqlite-web:
+    image: coleifer/sqlite-web
+    ports:
+      - "8082:8080"  # Changed from 8081 to 8082
+    volumes:
+      - ./writable/database:/data
+    environment:
+      SQLITE_DATABASE: desisabji.db
+
+
+
+networks:
+  desisabji-network:
+    driver: bridge
+
+volumes:
+  db_data:

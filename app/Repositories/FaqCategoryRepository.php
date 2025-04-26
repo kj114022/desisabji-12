@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\FaqCategory;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class FaqCategoryRepository
@@ -22,6 +22,15 @@ class FaqCategoryRepository extends BaseRepository
     protected $fieldSearchable = [
         'name'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

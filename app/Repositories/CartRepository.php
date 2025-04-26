@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Cart;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class CartRepository

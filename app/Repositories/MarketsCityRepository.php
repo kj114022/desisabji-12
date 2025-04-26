@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\MarketsCity;
 use App\Models\City;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class MarketsCityRepository

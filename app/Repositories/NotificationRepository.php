@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Notification;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class NotificationRepository

@@ -22,16 +22,20 @@ use App\Http\Controllers\API\SlideAPIController;
 use App\Http\Controllers\API\OptionGroupAPIController;
 use App\Http\Controllers\API\NotificationAPIController;
 use App\Http\Controllers\API\OrderAPIController;
+use App\Http\Controllers\API\OrderStatusAPIController;
 use App\Http\Controllers\API\DeliveryAddressAPIController;
 use App\Http\Controllers\API\PaymentAPIController;
-use App\Http\Controllers\API\WalletAPIController;
+use App\Http\Controllers\API\WalletAPIControllerAPI;
 use App\Http\Controllers\API\DashboardAPIController;
 use App\Http\Controllers\API\DriverAPIController;
 use App\Http\Controllers\API\EarningAPIController;
 use App\Http\Controllers\API\DriversPayoutAPIController;
 use App\Http\Controllers\API\MarketsPayoutAPIController;
 use App\Http\Controllers\API\CouponAPIController;
-
+use App\Http\Controllers\API\FavoriteAPIController;
+use App\Http\Controllers\API\CartAPIController;
+use App\Http\Controllers\API\OptionAPIController;
+use App\Http\Controllers\API\ProductOrderAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,34 +99,34 @@ Route::get('states', [MarketAPIController::class, 'states']);
 Route::get('city/areas/{id}', [MarketAPIController::class, 'cityArea']);
 Route::get('city/markets/{id}', [MarketAPIController::class, 'marketsForCity']);
 
-Route::get('faq_categories', [FaqCategoryAPIController::class]);
+Route::get('faq_categories', [FaqCategoryAPIController::class, 'index']);
 Route::get('products/categories', [ProductAPIController::class, 'categories']);
-Route::get('products', [ProductAPIController::class]);
-Route::get('galleries', [GalleryAPIController::class]);
+Route::get('products', [ProductAPIController::class, 'index']);
+Route::get('galleries', [GalleryAPIController::class, 'index']);
 Route::get('reviews/{id}', [ProductReviewAPIController::class, 'show']);
-Route::get('city/products/categories', [ProductCityAPIControlle::class, 'categories']);
-Route::get('city/products', [ProductCityAPIController::class]);
+Route::get('city/products/categories', [ProductCityAPIController::class, 'categories']);
+Route::get('city/products', [ProductCityAPIController::class, 'index']);
 
-Route::get('faqs', [FaqAPIController::class]);
-Route::get('market_reviews', [MarketReviewAPIController::class]);
-Route::get('currencies', [CurrencyAPIController::class]);
-Route::get('slides', [SlideAPIController::class],'show');
+Route::get('faqs', [FaqAPIController::class, 'index']);
+Route::get('market_reviews', [MarketReviewAPIController::class, 'index']);
+Route::get('currencies', [CurrencyAPIController::class, 'index']);
+Route::get('slides', [SlideAPIController::class, 'index']);
 
-//Route::resource('option_groups', [OptionGroupAPIController::class]);
 Route::get('option_groups/{id}', [OptionGroupAPIController::class, 'show']);
 
-Route::get('options', [OptionAPIController::class]);
+Route::get('options', [OptionAPIController::class, 'index']);
+
 Route::get('user/addresses/{id}', [DeliveryAddressAPIController::class, 'getAddressesByUser']);
 Route::get('products/feature/{id}/{cityId}', [ProductAPIController::class, 'getFeatureProducts']);
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::group(['middleware' => ['role:driver']], function () {
         Route::prefix('driver')->group(function () {
-            Route::get('orders', [OrderAPIController::class]);
-            Route::get('notifications', [NotificationAPIController::class]);
+            Route::get('orders', [OrderAPIController::class, 'index']);
+            Route::get('notifications', [NotificationAPIController::class, 'index']);
             Route::post('users/{id}', [UserAPIController::class, 'update']);
-            Route::get('faq_categories', [FaqCategoryAPIController::class]);
-            Route::get('faqs', [FaqAPIController::class]);
+            Route::get('faq_categories', [FaqCategoryAPIController::class, 'index']);
+            Route::get('faqs', [FaqAPIController::class, 'index']);
         });
     });
     Route::group(['middleware' => ['role:manager']], function () {
@@ -130,42 +134,42 @@ Route::middleware('auth:api')->group(function () {
             Route::post('users/{id}', [UserAPIController::class, 'update']);
             Route::get('users/drivers_of_market/{id}', [ManagerUserAPIController::class, 'driversOfMarket']);
             Route::get('dashboard/{id}', [DashboardAPIController::class, 'manager']);
-            Route::get('markets', [ManagerMarketAPIController::class]);
-            Route::get('notifications', [NotificationAPIController::class]);
+            Route::get('markets', [ManagerMarketAPIController::class, 'index']);
+            Route::get('notifications', [NotificationAPIController::class, 'index']);
         });
     });
     Route::post('users/{id}', [UserAPIController::class, 'update']);
 
-    Route::get('order_statuses', [OrderStatusAPIController::class]);
+    Route::get('order_statuses', [OrderStatusAPIController::class, 'index']);
 
     Route::get('payments/byMonth', [PaymentAPIController::class, 'byMonth'])->name('payments.byMonth');
-    Route::get('payments', [PaymentAPIController::class]);
+    Route::get('payments', [PaymentAPIController::class, 'index']);
 
     Route::get('favorites/exist', [FavoriteAPIController::class, 'exist']);
-    Route::get('favorites', [FavoriteAPIController::class]);
+    Route::get('favorites', [FavoriteAPIController::class, 'index']);
 
-    Route::get('orders', [OrderAPIController::class]);
+    Route::get('orders', [OrderAPIController::class, 'index']);
 
-    Route::get('product_orders', [ProductOrderAPIController::class]);
+    Route::get('product_orders', [ProductOrderAPIController::class, 'index']);
 
-    Route::get('notifications', [NotificationAPIController::class]);
+    Route::get('notifications', [NotificationAPIController::class, 'index']);
 
     Route::get('carts/count', [CartAPIController::class, 'count'])->name('carts.count');
-    Route::get('carts', [CartAPIController::class]);
+    Route::get('carts', [CartAPIController::class, 'index']);
     Route::post('carts/clean/{id}', [CartAPIController::class, 'cleanCart']);
-    Route::get('delivery_addresses', [DeliveryAddressAPIController::class]);
+    Route::get('delivery_addresses', [DeliveryAddressAPIController::class, 'index']);
    
  
 
-    Route::get('drivers', [DriverAPIController::class]);
+    Route::get('drivers', [DriverAPIController::class, 'index']);
 
-    Route::get('earnings', [EarningAPIController::class]);
+    Route::get('earnings', [EarningAPIController::class, 'index']);
 
-    Route::get('driversPayouts', [DriversPayoutAPIController::class]);
+    Route::get('driversPayouts', [DriversPayoutAPIController::class, 'index']);
 
-    Route::get('marketsPayouts', [MarketsPayoutAPIController::class]);
+    Route::get('marketsPayouts', [MarketsPayoutAPIController::class, 'index']);
 
-    Route::get('coupons', [CouponAPIController::class,'show']);
+    Route::get('coupons', [CouponAPIController::class, 'index']);
 
-    Route::get('wallet', [WalletAPIController::class]);
+    Route::get('wallet', [WalletAPIControllerAPI::class, 'index']);
 });

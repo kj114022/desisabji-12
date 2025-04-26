@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\OptionGroup;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class OptionGroupRepository
@@ -22,6 +22,15 @@ class OptionGroupRepository extends BaseRepository
     protected $fieldSearchable = [
         'name'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

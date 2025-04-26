@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Market;
-use InfyOm\Generator\Common\BaseRepository;
+
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Traits\CacheableRepository;
 
@@ -41,6 +41,15 @@ class MarketRepository extends BaseRepository implements CacheableInterface
         'closed',
         'admin_commission',
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

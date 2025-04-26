@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Currency;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class CurrencyRepository
@@ -26,6 +26,15 @@ class CurrencyRepository extends BaseRepository
         'decimal_digits',
         'rounding'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

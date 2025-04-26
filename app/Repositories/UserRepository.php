@@ -55,9 +55,4 @@ class UserRepository extends BaseRepository
     {
         return User::class;
     }
-
-    public function findByMobile($mobile)
-    {
-        return User::where('mobile', $mobile)->get()->first();
-    }
 }

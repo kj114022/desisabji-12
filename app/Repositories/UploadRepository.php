@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\Media;
 use App\Models\Upload;
 use Illuminate\Support\Facades\Log;
-use InfyOm\Generator\Common\BaseRepository;
 
 /**
  * Class UploadRepository
@@ -24,6 +23,14 @@ class UploadRepository extends BaseRepository
     protected $fieldSearchable = [
 
     ];
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model
@@ -70,17 +77,14 @@ class UploadRepository extends BaseRepository
         return $medias;
     }
 
-
     public function collectionsNames()
     {
         $medias = Media::all('collection_name')->pluck('collection_name','collection_name')->map(function ($c) {
                 return ['value' => $c,
-                    'title' => title_case(preg_replace('/_/', ' ', $c))
+                    'title' => ucwords(preg_replace('/_/', ' ', $c))
                 ];
         })->unique();
         unset($medias['default']);
-        $medias->prepend(['value' => 'default', 'title' => 'Default'],'default');
         return $medias;
     }
-
 }

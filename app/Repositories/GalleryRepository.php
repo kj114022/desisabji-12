@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Gallery;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class GalleryRepository
@@ -23,6 +23,15 @@ class GalleryRepository extends BaseRepository
         'description',
         'market_id'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

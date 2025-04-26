@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\MarketReview;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class MarketReviewRepository
@@ -25,6 +25,15 @@ class MarketReviewRepository extends BaseRepository
         'user_id',
         'market_id'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

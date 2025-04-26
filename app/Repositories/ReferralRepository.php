@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Referral;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class ReferralRepository
@@ -25,6 +25,15 @@ class ReferralRepository extends BaseRepository
         'referral_amt',
         'payment_status'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

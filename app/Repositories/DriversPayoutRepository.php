@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\DriversPayout;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class DriversPayoutRepository
@@ -26,6 +26,15 @@ class DriversPayoutRepository extends BaseRepository
         'paid_date',
         'note'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

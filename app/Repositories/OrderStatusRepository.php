@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\OrderStatus;
-use InfyOm\Generator\Common\BaseRepository;
+
 
 /**
  * Class OrderStatusRepository
@@ -22,6 +22,15 @@ class OrderStatusRepository extends BaseRepository
     protected $fieldSearchable = [
         'status'
     ];
+
+    /**
+     * Get searchable fields
+     * @return array
+     */
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     /**
      * Configure the Model

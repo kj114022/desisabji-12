@@ -14,43 +14,29 @@ class DriverMarketsTableSeeder extends Seeder
      */
     public function run()
     {
-
-
         \DB::table('driver_markets')->delete();
 
-        \DB::table('driver_markets')->insert(array(
-            0 =>
-                array(
-                    'user_id' => 5,
-                    'market_id' => 1,
-                ),
-            1 =>
-                array(
-                    'user_id' => 5,
-                    'market_id' => 2,
-                ),
-            2 =>
-                array(
-                    'user_id' => 5,
-                    'market_id' => 4,
-                ),
-            3 =>
-                array(
-                    'user_id' => 6,
-                    'market_id' => 2,
-                ),
-            4 =>
-                array(
-                    'user_id' => 6,
-                    'market_id' => 3,
-                ),
-            5 =>
-                array(
-                    'user_id' => 6,
-                    'market_id' => 4,
-                ),
-        ));
-
-
+        // First check which market IDs actually exist
+        $marketIds = \DB::table('markets')->pluck('id')->toArray();
+        
+        // Only proceed if we have markets
+        if (count($marketIds) > 0) {
+            $driverMarkets = [];
+            
+            // Use existing market IDs
+            if (in_array(1, $marketIds)) $driverMarkets[] = ['user_id' => 5, 'market_id' => 1];
+            if (in_array(2, $marketIds)) $driverMarkets[] = ['user_id' => 5, 'market_id' => 2];
+            if (in_array(3, $marketIds)) {
+                $driverMarkets[] = ['user_id' => 6, 'market_id' => 3];
+            } else if (count($marketIds) >= 3) {
+                $driverMarkets[] = ['user_id' => 6, 'market_id' => $marketIds[2]];
+            }
+            
+            // Add more as needed, checking for existence
+            
+            if (!empty($driverMarkets)) {
+                \DB::table('driver_markets')->insert($driverMarkets);
+            }
+        }
     }
 }
