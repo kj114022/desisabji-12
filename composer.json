@@ -1,0 +1,83 @@
+{
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^8.3",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "anlutro/l4-settings": "^1.4",
+        "illuminate/support": "^12.0",
+        "illuminate/view": "^12.0",
+        "laracasts/flash": "^3.2",
+        "laravel-lang/publisher": "^16.0",
+        "laravel/cashier": "^15.6",
+        "laravel/framework": "^12.0",
+        "laravel/helpers": "*",
+        "laravel/sanctum": "^4.0",
+        "laravel/tinker": "^2.10.1",
+        "laravel/ui": "^4.6",
+        "livewire/flux": "^2.1.1",
+        "livewire/volt": "^1.7.0",
+        "prettus/l5-repository": "^2.10",
+        "razorpay/razorpay": "2.*",
+        "spatie/laravel-medialibrary": "^11.12",
+        "spatie/laravel-permission": "^6.18",
+        "stripe/stripe-php": "*",
+        "yajra/laravel-datatables": "^12.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
+        "fakerphp/faker": "^1.24",
+        "filp/whoops": "^2.0",
+        "mockery/mockery": "^1.0",
+        "pestphp/pest": "^3.0",
+        "phpunit/phpunit": "^11.5.3"
+    },
+    "autoload": {
+        "files": [
+            "app/Helpers/helpers.php"
+        ],
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

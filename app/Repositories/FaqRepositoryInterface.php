@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\Faq;
+/**
+ * Class FaqRepository
+ * @package App\Repositories
+ * @version August 29, 2019, 9:39 pm UTC
+ *
+ * @method Faq findWithoutFail($id, $columns = ['*'])
+ * @method Faq find($id, $columns = ['*'])
+ * @method Faq first($columns = ['*'])
+*/
+interface FaqRepositoryInterface extends BaseRepositoryInterface
+{
+   
+}

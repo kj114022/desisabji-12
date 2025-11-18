@@ -1,0 +1,24 @@
+[13-Apr-2021 07:16:36 UTC] PHP Parse error:  syntax error, unexpected ':', expecting '{' in /home/v49nuebyvj2w/public_html/market.desisabji.com/vendor/symfony/polyfill-php80/bootstrap.php on line 23
+[13-Apr-2021 07:17:31 UTC] PHP Parse error:  syntax error, unexpected ':', expecting '{' in /home/v49nuebyvj2w/public_html/market.desisabji.com/vendor/symfony/polyfill-php80/bootstrap.php on line 23
+[13-Apr-2021 07:18:41 UTC] PHP Parse error:  syntax error, unexpected ':', expecting '{' in /home/v49nuebyvj2w/public_html/market.desisabji.com/vendor/symfony/polyfill-php80/bootstrap.php on line 23
+[13-Apr-2021 07:19:18 UTC] PHP Parse error:  syntax error, unexpected ':', expecting '{' in /home/v49nuebyvj2w/public_html/market.desisabji.com/vendor/symfony/polyfill-php80/bootstrap.php on line 23
+[13-Apr-2021 07:19:36 UTC] PHP Parse error:  syntax error, unexpected ':', expecting '{' in /home/v49nuebyvj2w/public_html/market.desisabji.com/vendor/symfony/polyfill-php80/bootstrap.php on line 23
+[13-Apr-2021 07:23:16 UTC] PHP Parse error:  syntax error, unexpected ':', expecting '{' in /home/v49nuebyvj2w/public_html/market.desisabji.com/vendor/symfony/polyfill-php80/bootstrap.php on line 23
+[13-Apr-2021 07:29:02 UTC] PHP Parse error:  syntax error, unexpected ':', expecting '{' in /home/v49nuebyvj2w/public_html/market.desisabji.com/vendor/symfony/polyfill-php80/bootstrap.php on line 23
+[27-Apr-2021 04:13:31 UTC] PHP Fatal error:  Uncaught Error: Object of class Illuminate\Database\Eloquent\Builder could not be converted to string in /home/admin/public_html/market/app/Repositories/DeliveryAddressRepository.php:47
+Stack trace:
+#0 /home/admin/public_html/market/app/Http/Controllers/API/DeliveryAddressAPIController.php(149): App\Repositories\DeliveryAddressRepository->getAddressesByUserId('68')
+#1 [internal function]: App\Http\Controllers\API\DeliveryAddressAPIController->getAddressesByUser('68')
+#2 /home/admin/public_html/market/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#3 /home/admin/public_html/market/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('getAddressesByU...', Array)
+#4 /home/admin/public_html/market/vendor/laravel/framework/src/Illuminate/Routing/Route.php(219): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\API\DeliveryAddressAPI in /home/admin/public_html/market/app/Repositories/DeliveryAddressRepository.php on line 47
+[27-Apr-2021 04:14:33 UTC] PHP Fatal error:  Uncaught Error: Object of class Illuminate\Database\Eloquent\Builder could not be converted to string in /home/admin/public_html/market/app/Repositories/DeliveryAddressRepository.php:47
+Stack trace:
+#0 /home/admin/public_html/market/app/Http/Controllers/API/DeliveryAddressAPIController.php(149): App\Repositories\DeliveryAddressRepository->getAddressesByUserId('68')
+#1 [internal function]: App\Http\Controllers\API\DeliveryAddressAPIController->getAddressesByUser('68')
+#2 /home/admin/public_html/market/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#3 /home/admin/public_html/market/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('getAddressesByU...', Array)
+#4 /home/admin/public_html/market/vendor/laravel/framework/src/Illuminate/Routing/Route.php(219): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\API\DeliveryAddressAPI in /home/admin/public_html/market/app/Repositories/DeliveryAddressRepository.php on line 47
+[29-Apr-2021 01:48:33 UTC] PHP Warning:  POST Content-Length of 13532877 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[21-May-2021 02:58:08 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[21-May-2021 03:08:17 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
