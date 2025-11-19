@@ -1,14 +1,105 @@
-/node_modules
+# ==============================================================================
+# Dependency & package directories
+# ==============================================================================
+/vendor/
+/node_modules/
+/public/vendor/
+/public/plugins/
+/public/build/
+
+# ==============================================================================
+# Laravel build artifacts & generated assets
+# ==============================================================================
 /public/hot
-/public/plugins
+/public/mix-manifest.json
 /public/storage
+/storage/app/public
+/storage/debugbar
+/storage/framework/cache/data
+/storage/framework/sessions
+/storage/framework/testing
+/storage/framework/views
+/storage/logs/*
 /storage/*.key
-/vendor
-/.idea
-/.vscode
-/.vagrant
+/bootstrap/cache/*.php
+/.fleet
+
+# ==============================================================================
+# Environment & machine-specific configuration
+# ==============================================================================
+.env
+.env.*
+!.env.example
 Homestead.json
 Homestead.yaml
-npm-debug.log
-yarn-error.log
-.env
+/.vagrant/
+/docker-compose.override.yml
+/.idea/
+/.vscode/
+/.phpstorm.meta.php
+*.iml
+*.code-workspace
+
+# ==============================================================================
+# Logs & reports
+# ==============================================================================
+*.log
+storage/logs/*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+/coverage/
+/reports/
+
+# ==============================================================================
+# Testing & QA artifacts
+# ==============================================================================
+/.phpunit.result.cache
+/.phpunit.cache
+.phpunit.result.cache
+/phpunit.xml.bak
+/phpstan.neon.local
+/infection.log
+
+# ==============================================================================
+# Frontend tooling caches
+# ==============================================================================
+/.vite/
+/.turbo/
+/.eslintcache
+/.stylelintcache
+/.sass-cache/
+/.cache/
+
+# ==============================================================================
+# PHP tooling caches
+# ==============================================================================
+/.php-cs-fixer.cache
+/.php-cs-fixer.php
+/.phpstan/
+/.scannerwork
+
+# ==============================================================================
+# OS & editor cruft
+# ==============================================================================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+Icon?
+.Spotlight-V100
+.Trashes
+
+# ==============================================================================
+# Misc backups & generated files
+# ==============================================================================
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
+*.seed
+*.log.*
+*.pid
+
