@@ -19,16 +19,21 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://localhost:5173'],
+    'allowed_origins' => [
+        'http://localhost:4200',      // Angular dev server
+        'http://127.0.0.1:4200',
+        'http://localhost:3000',      // Alternate dev port
+        'https://yourdomain.com',     // Production domain
+    ],
 
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['*'],
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];

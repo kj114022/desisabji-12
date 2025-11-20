@@ -1,6 +1,9 @@
-# Desisabji - Laravel 12 E-commerce Platform
+# Desisabji - Full Stack E-commerce Platform
 
-A modern Laravel 12 e-commerce application for organic vegetables and groceries with features including product management, order processing, payment integration (PayPal & Stripe), user authentication, and admin dashboard.
+A modern **decoupled e-commerce application** with:
+- **Backend:** Laravel 12 REST API
+- **Frontend:** Angular 18+ SPA
+- **Features:** Product management, order processing, payment integration (PayPal, Stripe, Razorpay), user authentication, and real-time updates
 
 ## Project Overview
 

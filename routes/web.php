@@ -1,68 +1,24 @@
 <?php
 /**
- * File name: web.php
- * Last modified: 2020.06.07 at 07:02:57
-
+ * DesiSabji - Laravel 12 API Backend
+ * Web Routes (API Gateway)
  *
+ * All frontend requests go to the Angular app
+ * This file serves as an API status endpoint only
  */
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
-use App\Http\Middleware\App;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PayPalController;
-use App\Http\Controllers\RazorPayController;
-use App\Http\Controllers\AppSettingController;
-use App\Http\Controllers\UploadController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\MarketController;
-use App\Http\Controllers\FieldController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\FaqCategoryController;
-use App\Http\Controllers\OrderStatusController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\ProductReviewController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\CurrencyController;
-use App\Http\Controllers\OptionController;
-use App\Http\Controllers\OptionGroupController;
-use App\Http\Controllers\CouponController;
-use App\Http\Controllers\SlideController;
-use App\Http\Controllers\DeliveryAddressController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\MarketReviewController;
-use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\DriverController;
-use App\Http\Controllers\EarningController;
-use App\Http\Controllers\DriversPayoutController;
-use App\Http\Controllers\MarketsPayoutController;
-use App\Http\Controllers\CustomFieldController;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\API\AuthController;
 
-
-
-
+// API Status Endpoint
 Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+    return response()->json([
+        'status' => 'ok',
+        'app' => 'DesiSabji API',
+        'version' => config('app.version'),
+        'message' => 'Use /api endpoints for all API requests',
+        'frontend' => 'Angular App running on http://localhost:4200',
+    ]);
+})->name('api.status');
 
 /*Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
